@@ -12,9 +12,8 @@ let deck = [];
 const tipos = ['C', 'D', 'H', 'S'];
 const especiales = ['A', 'J', 'Q', 'K'];
 
-let puntosJugador = 0,
-  puntosComputadora = 0;
-
+let puntosJugador = 0;
+let puntosComputadora = 0;
 
 //Referencias del HTML
 const divCartasJugador = document.querySelector('#jugador-cartas');
@@ -46,11 +45,10 @@ const crearDeck = () => {
     }
   }
 
-  deck = _.shuffle(deck); //Mezclar usando la libreria importada underscore.js shuffle
+  deck = _.shuffle(deck);
   console.log(deck);
 
   return deck;
-
 }
 
 crearDeck()
@@ -76,33 +74,11 @@ const valorCarta = (carta) => {
 
   const valor = carta.substring(0, carta.length - 1);
 
-  //Tarea reducir el código
-  // let puntos = 0;
-
-  // if (isNaN(valor)) {
-  //   console.log('No es un número');
-  //   puntos = (valor === 'A') ? 11 : 10;
-
-  // } else {
-  //   console.log('Es un número');
-  //   puntos = valor * 1;
-
-  // }
-
-  // let puntos = (isNaN(valor)) ? (valor === 'A' ? 11 : 10) : valor * 1; //Multiplica *1 para transformar valor de cadena a numero
-  // console.log(puntos);
-  // return puntos;
-
-
-  //Todo el código anterior puede sustituirse por un condicional terciario.
   return (isNaN(valor))
     ? (valor === 'A' ? 11 : 10)
     : valor * 1;
-  //Multiplica *1 para transformar valor de cadena a numero
-
 };
 
-//Turno de la computadora
 const turnoComputadora = (puntosMinimos) => {
 
   do {
@@ -114,64 +90,29 @@ const turnoComputadora = (puntosMinimos) => {
     /**
      * crea la carta en el navegador
      */
-    // <img class="carta" src="assets/cartas/10H.png" alt=""/>
     const imgCarta = document.createElement('img');
-    // imgCarta.classList = 'carta'; nop
     imgCarta.classList.add('carta');
     imgCarta.src = `assets/cartas/${carta}.png`;
     divCartasComputadora.append(imgCarta);
 
-
   } while ((puntosComputadora < puntosMinimos) && (puntosMinimos < 21));
 
-
-  // if (puntosMinimos > 21) {
-  //   console.warn('Gana la compu');
-  // } else if (puntosComputadora <= 21 && puntosComputadora > puntosMinimos) {
-  //   console.warn('Gana la compu');
-  // } else if (puntosComputadora === puntosMinimos) {
-  //   console.warn('No gana nadie');
-  // } else {
-  //   console.warn('Gana el jugador');
-  // };
-
   setTimeout(() => {
-
-    // (puntosMinimos > 21 && puntosComputadora > 21)
-    //   ? alert("No gana nadie")
-    //   : (puntosMinimos === puntosComputadora)
-    //     ? alert("No gana nadie")
-    //     : (puntosMinimos < 21 && puntosComputadora > 21)
-    //       ? alert('Gana jugador')
-    //       : (puntosMinimos > puntosComputadora)
-    //         ? alert('Gana el jugador')
-    //         : alert('Gana el computador');
-
     if (puntosMinimos === puntosComputadora) {
       alert('Nadie gana :(');
     } else if (puntosMinimos > 21) {
       alert('Computadora gana');
     } else if (puntosMinimos === 21 && puntosComputadora < 21) {
       alert('Jugador gana');
-
     } else if (puntosComputadora > 21) {
       alert('Jugador gana');
     } else {
       alert('Computadora gana');
-
     }
-
   }, 1000);
-
 }
 
-//a valor asigna el retorno de la función valorCarta tras pasarle de argumento pedirCarta() que retorna una carta aleatoria
-//const valor = valorCarta(pedirCarta());
-
-
 //EVENTOS 
-
-//btnPedir.addEventListener('click', function () { //Esta función anonima es un callback lo vamos a dejar como una funcion de flecha.
 btnPedir.addEventListener('click', () => {
 
   const carta = pedirCarta();
@@ -181,9 +122,7 @@ btnPedir.addEventListener('click', () => {
   /**
    * crea la carta en el navegador
    */
-  // <img class="carta" src="assets/cartas/10H.png" alt=""/>
   const imgCarta = document.createElement('img');
-  // imgCarta.classList = 'carta'; nop
   imgCarta.classList.add('carta');
   imgCarta.src = `assets/cartas/${carta}.png`;
   divCartasJugador.append(imgCarta);
@@ -209,7 +148,6 @@ btnPedir.addEventListener('click', () => {
 
 
 btnDetener.addEventListener('click', () => {
-
 
   btnDetener.disabled = true;
   btnPedir.disabled = true;
@@ -237,5 +175,4 @@ btnNuevo.addEventListener('click', () => {
   divCartasComputadora.innerHTML = '';
   divCartasJugador.innerHTML = '';
 
-
-})
+});
