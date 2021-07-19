@@ -5,10 +5,24 @@
  *  2S = Two of Spades
  */
 
-
+/**
+ * Declaración de variables
+ */
 let deck = [];
 const tipos = ['C', 'D', 'H', 'S'];
 const especiales = ['A', 'J', 'Q', 'K'];
+
+let puntosJugador = 0,
+  puntosComputadora = 0;
+
+
+//Referencias del HTML
+const btnNuevo = document.querySelector('#btnNuevo');
+const btnPedir = document.querySelector('#btnPedir');
+const btnDetener = document.querySelector('#btnDetener');
+const puntosHtml = document.querySelectorAll('small');
+
+
 
 /**
  * Crea una nueva baraja de cartas mezclada y la devuelve
@@ -29,7 +43,10 @@ const crearDeck = () => {
     }
   }
 
-  return deck = _.shuffle(deck); //Mezclar usando la libreria importada underscore.js shuffle
+  deck = _.shuffle(deck); //Mezclar usando la libreria importada underscore.js shuffle
+  console.log(deck);
+
+  return deck;
 
 }
 
@@ -86,4 +103,13 @@ const valorCarta = (carta) => {
 //const valor = valorCarta(pedirCarta());
 
 
-//EVENTOS
+//EVENTOS 
+
+//btnPedir.addEventListener('click', function () { //Esta función anonima es un callback lo vamos a dejar como una funcion de flecha.
+btnPedir.addEventListener('click', () => {
+
+  const carta = pedirCarta();
+  puntosJugador = puntosJugador + valorCarta(carta);
+  puntosHtml[0].innerText = puntosJugador;
+
+})
